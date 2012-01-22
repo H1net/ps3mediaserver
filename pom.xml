@@ -69,13 +69,7 @@
 
 	<properties>
 		<!-- NSIS needs a version without "-SNAPSHOT" or "-b1" -->
-<<<<<<< HEAD
 		<project.version.short>1.50.1</project.version.short>
-	
-=======
-		<project.version.short>1.50.0</project.version.short>
-
->>>>>>> 4daa388b93e588b29e9eed5e53cafd9300c5d33d
 		<cuelib-version>1.2.1-2008-06-13</cuelib-version>
 		<jgoodies-common-version>1.2.1</jgoodies-common-version>
 		<jgoodies-forms-version>1.4.2</jgoodies-forms-version>
