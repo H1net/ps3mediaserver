@@ -1,3 +1,9 @@
+1.50.1-SB59:
+    * Switched from using SVN source to Git
+    * Synchronised with official r1106 (dd74c3be7f) from r1010, changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
+    * Updated MPlayer and MEncoder to SB22 from SB19, changelog: http://www.spirton.com/mplayer-mencoder-subjunk-build/#Changelog
+    * Updated FFmpeg to r35509 from r31564
+
 1.50.1-SB58:
     * Synchronised with official r1014 from r1010, changelog: https://code.google.com/p/ps3mediaserver/source/list?num=4&start=1014
     * Improved audio synchronisation (thanks, ExSport! from http://www.ps3mediaserver.org/forum/viewtopic.php?f=11&t=11284&p=62808#p62765)
