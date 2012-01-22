@@ -69,8 +69,13 @@
 
 	<properties>
 		<!-- NSIS needs a version without "-SNAPSHOT" or "-b1" -->
+<<<<<<< HEAD
 		<project.version.short>1.50.1</project.version.short>
 	
+=======
+		<project.version.short>1.50.0</project.version.short>
+
+>>>>>>> 4daa388b93e588b29e9eed5e53cafd9300c5d33d
 		<cuelib-version>1.2.1-2008-06-13</cuelib-version>
 		<jgoodies-common-version>1.2.1</jgoodies-common-version>
 		<jgoodies-forms-version>1.4.2</jgoodies-forms-version>
@@ -81,11 +86,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.external-resources>${project.basedir}/src/main/external-resources</project.external-resources>
 		<project.binaries>${project.basedir}/target/bin</project.binaries>
-		
+
 		<!-- Snapshots should get their binaries from the trunk, releases from a tag -->
 		<project.binaries-base>http://ps3mediaserver.googlecode.com/svn/trunk/ps3mediaserver</project.binaries-base>
 		<!-- <project.binaries-base>http://ps3mediaserver.googlecode.com/svn/tags/1.40.0</project.binaries-base> -->
-		
+
 		<maven.nsis.project.template>${project.basedir}/src/main/external-resources/nsis/project.jelly</maven.nsis.project.template>
 	</properties>
 
