@@ -59,7 +59,7 @@ public class AboutTab {
 	public JComponent build() {
 		FormLayout layout = new FormLayout(
 			"0:grow, pref, 0:grow",
-			"pref, 3dlu, pref, 3dlu, pref, 12dlu, pref, 3dlu, pref, 3dlu, pref, 3dlu, p, 3dlu, p, 3dlu, p");
+			"pref, 3dlu, pref, 3dlu, pref, 12dlu, pref, 3dlu, pref, 3dlu, pref, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p");
 
 		PanelBuilder builder = new PanelBuilder(layout);
 		builder.setDefaultDialogBorder();
@@ -120,7 +120,13 @@ public class AboutTab {
 			"http://www.imagemagick.org");
 		JLabel lImageMagickLink = builder.addLabel(imageMagickLink.getLabel(), cc.xy(2, 17, "center, fill"));
 		lImageMagickLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lImageMagickLink.addMouseListener(imageMagickLink);
+		lImageMagickLink.addMouseListener(imageMagickLink); 
+
+		final LinkMouseListener spirtonLink = new LinkMouseListener("Spirton (SubJunk Build Blog)",
+			"http://www.spirton.com");
+		JLabel lSpirtonLink = builder.addLabel(spirtonLink.getLabel(), cc.xy(2, 19, "center, fill"));
+		lSpirtonLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lSpirtonLink.addMouseListener(spirtonLink);
 
 		JScrollPane scrollPane = new JScrollPane(builder.getPanel());
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());

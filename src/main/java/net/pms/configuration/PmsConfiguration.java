@@ -966,7 +966,7 @@ public class PmsConfiguration {
 	 * @return True if fontconfig should be used, false otherwise.
 	 */
 	public boolean isMencoderFontConfig() {
-		return getBoolean(KEY_MENCODER_FONT_CONFIG, false);
+		return getBoolean(KEY_MENCODER_FONT_CONFIG, true);
 	}
 
 	/**
@@ -1253,7 +1253,7 @@ public class PmsConfiguration {
 	}
 
 	public boolean getHideVideoSettings() {
-		return getBoolean(KEY_HIDE_VIDEO_SETTINGS, false);
+		return getBoolean(KEY_HIDE_VIDEO_SETTINGS, true);
 	}
 
 	public void setHideVideoSettings(boolean value) {
@@ -1486,7 +1486,7 @@ public class PmsConfiguration {
 	}
 
 	public boolean isHideEngineNames() {
-		return getBoolean(KEY_HIDE_ENGINENAMES, false);
+		return getBoolean(KEY_HIDE_ENGINENAMES, true);
 	}
 
 	public void setHideEngineNames(boolean value) {
@@ -1494,7 +1494,7 @@ public class PmsConfiguration {
 	}
 
 	public boolean isHideExtensions() {
-		return getBoolean(KEY_HIDE_EXTENSIONS, false);
+		return getBoolean(KEY_HIDE_EXTENSIONS, true);
 	}
 
 	public void setHideExtensions(boolean value) {
@@ -1563,7 +1563,7 @@ public class PmsConfiguration {
 	}
 
 	public boolean isMencoderAssDefaultStyle() {
-		return getBoolean(KEY_MENCODER_ASS_DEFAULTSTYLE, false);
+		return getBoolean(KEY_MENCODER_ASS_DEFAULTSTYLE, true);
 	}
 
 	public int getMEncoderOverscan() {
@@ -1584,11 +1584,11 @@ public class PmsConfiguration {
 	 * <li>3: Case-insensitive ASCIIbetical sort</li>
 	 * <li>4: Locale-sensitive natural sort</li>
 	 * </ul>
-	 * Default value is 0.
+	 * Default value is 3.
 	 * @return The sort method
 	 */
 	public int getSortMethod() {
-		return getInt(KEY_SORT_METHOD, 0);
+		return getInt(KEY_SORT_METHOD, 3);
 	}
 
 	/**
@@ -1733,7 +1733,7 @@ public class PmsConfiguration {
 	}
 
 	public boolean getHideTranscodeEnabled() {
-		return getBoolean(KEY_HIDE_TRANSCODE_FOLDER, false);
+		return getBoolean(KEY_HIDE_TRANSCODE_FOLDER, true);
 	}
 
 	public void setHideTranscodeEnabled(boolean value) {

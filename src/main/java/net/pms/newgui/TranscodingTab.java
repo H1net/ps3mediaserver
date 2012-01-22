@@ -580,19 +580,6 @@ public class TranscodingTab {
 		vq.setEditable(true);
 		builder.add(vq, cc.xyw(1, 31, 3));
 
-		String help1 = Messages.getString("TrTab2.39");
-		help1 += Messages.getString("TrTab2.40");
-		help1 += Messages.getString("TrTab2.41");
-		help1 += Messages.getString("TrTab2.42");
-		help1 += Messages.getString("TrTab2.43");
-		help1 += Messages.getString("TrTab2.44");
-
-		JTextArea decodeTips = new JTextArea(help1);
-		decodeTips.setEditable(false);
-		decodeTips.setBorder(BorderFactory.createEtchedBorder());
-		decodeTips.setBackground(new Color(255, 255, 192));
-		builder.add(decodeTips, cc.xyw(1, 41, 3));
-
 		disableSubs = new JCheckBox(Messages.getString("TrTab2.51"));
 		disableSubs.setContentAreaFilled(false);
 
