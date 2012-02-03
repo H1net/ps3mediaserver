@@ -87,7 +87,6 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 	private static final int STOP_PLAYING_DELAY = 4000;
 	private static final SimpleDateFormat SDF_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
 
-
 	/**
 	 * @deprecated Use standard getter and setter to access this variable.
 	 */
@@ -536,15 +535,17 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 						}
 
 						boolean hasEmbeddedSubs = false;
+
 						if (child.getMedia() != null) {
 							for (DLNAMediaSubtitle s : child.getMedia().getSubtitlesCodes()) {
-								hasEmbeddedSubs |= s.getSubType().equals("Embedded");
+								hasEmbeddedSubs = (hasEmbeddedSubs || s.isEmbedded());
 							}
 						}
 
 						boolean hasSubsToTranscode = false;
+
 						if (!PMS.getConfiguration().isMencoderDisableSubs()) {
-						    hasSubsToTranscode = (PMS.getConfiguration().getUseSubtitles() && child.isSrtFile()) || hasEmbeddedSubs;
+							hasSubsToTranscode = (PMS.getConfiguration().getUseSubtitles() && child.isSrtFile()) || hasEmbeddedSubs;
 						}
 
 						boolean isIncompatible = false;
@@ -559,8 +560,8 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 						// or 3- FFmpeg support and the file is not ps3 compatible (need to remove this ?) and no SkipTranscode extension forced by user
 						// or 4- There's some sub files or embedded subs to deal with and no SkipTranscode extension forced by user
 						if (forceTranscode || !isSkipTranscode() && (forceTranscodeV2 || isIncompatible || hasSubsToTranscode)) {
-						    child.setPlayer(pl);
-						    LOGGER.trace("Switching " + child.getName() + " to player " + pl.toString() + " for transcoding");
+							child.setPlayer(pl);
+							LOGGER.trace("Switching " + child.getName() + " to player " + pl.toString() + " for transcoding");
 						}
 
 						if (child.getExt().isVideo()) {
@@ -823,20 +824,19 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 	}
 
 	/**
-	 * Reload the list of children. 
+	 * Reload the list of children.
 	 */
 	public void doRefreshChildren() {
 	}
 
 	/**
-	 * 
-	 * @return true, if the container is changed, so refresh is needed. 
-	 * This could be called a lot's of times.
+	 * @return true, if the container is changed, so refresh is needed.
+	 * This could be called a lot of times.
 	 */
 	public boolean isRefreshNeeded() {
 		return false;
 	}
-	
+
 	/**
 	 * This method gets called only for the browsed folder, and not for the parent folders. (And in the media library scan step too). 
 	 * Override in plugins, when you doesn't want to implement proper change tracking, and you don't care if the 
@@ -1217,7 +1217,7 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 					if (getMedia() != null && getMedia().isMediaparsed()) {
 						addAttribute(sb, "bitrate", getMedia().getBitrate());
 						if (getMedia().getDuration() != null) {
-							addAttribute(sb, "duration", getMedia().getDuration());
+							addAttribute(sb, "duration", DLNAMediaInfo.getDurationString(getMedia().getDuration()));
 						}
 						if (firstAudioTrack != null && firstAudioTrack.getSampleFrequency() != null) {
 							addAttribute(sb, "sampleFrequency", firstAudioTrack.getSampleFrequency());
