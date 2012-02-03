@@ -1,3 +1,15 @@
+1.50.2-SB63:
+    * Synchronised with official r1088 from r1085, changelog: https://code.google.com/p/ps3mediaserver/source/list?num=3&start=1088
+
+1.50.2-SB62:
+    * Synchronised with official r1085 from r1024, changelog: https://code.google.com/p/ps3mediaserver/source/list?num=61&start=1085
+    * Updated MPlayer and MEncoder to SB23 from SB19, changelog: http://www.spirton.com/mplayer-mencoder-subjunk-build/#Changelog
+
+1.50.1-SB61:
+    * Switched from using Git source back to SVN
+    * Synchronised with official r1024 from r1014, changelog: https://code.google.com/p/ps3mediaserver/source/list?num=10&start=1024
+    * Updated to latest versions of libraries (codec, jdom, logback and slf4j)
+
 1.50.1-SB60:
     * Synchronised with official r1108 (4daa388b93) from r1106, changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
     * Reverted installation directory
