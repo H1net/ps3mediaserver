@@ -1,3 +1,8 @@
+1.50.2-SB64:
+    * Switched from using SVN source to Git
+    * Synchronised with official r1131 (d9f34153dd) from r1088, changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
+    * MEncoder video scaling code rewrite, details: https://github.com/SubJunk/ps3mediaserver/commit/f604e9c3ade23bab6711c53f7fa1cea3e63818ae
+
 1.50.2-SB63:
     * Synchronised with official r1088 from r1085, changelog: https://code.google.com/p/ps3mediaserver/source/list?num=3&start=1088
 
