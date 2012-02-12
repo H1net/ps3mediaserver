@@ -25,7 +25,6 @@ import static net.pms.util.StringUtil.encodeXML;
 import static net.pms.util.StringUtil.endTag;
 import static net.pms.util.StringUtil.openTag;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PipedInputStream;
@@ -916,7 +915,7 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 		}
 
 		if (isSrtFile() && (getMediaAudio() == null && getMediaSubtitle() == null)
-				&& getPlayer() == null || getPlayer().isExternalSubtitlesSupported()) {
+				&& getPlayer() == null || (getPlayer() != null && getPlayer().isExternalSubtitlesSupported())) {
 			name += " {External Subtitles}";
 		}
 
@@ -1233,7 +1232,7 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 								int defaultFrequency = mediaRenderer.isTranscodeAudioTo441() ? 44100 : 48000;
 								if (!PMS.getConfiguration().isAudioResample()) {
 									try {
-										// FIXME: Which exception could be thrown here?
+										// TODO: Which exception could be thrown here?
 										defaultFrequency = firstAudioTrack.getSampleRate();
 									} catch (Exception e) {
 										LOGGER.debug("Caught exception", e);
