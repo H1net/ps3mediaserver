@@ -28,6 +28,8 @@ import java.io.PrintStream;
 import java.net.BindException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -319,10 +321,9 @@ public class PMS {
 		configuration.addConfigurationListener(new ConfigurationListener() {
 			@Override
 			public void configurationChanged(ConfigurationEvent event) {
-				if (!event.isBeforeUpdate()) {
-					if (PmsConfiguration.NEED_RELOAD_FLAGS.contains(event.getPropertyName())) {
-						frame.setReloadable(true);
-					}
+				if ((!event.isBeforeUpdate())
+						&& PmsConfiguration.NEED_RELOAD_FLAGS.contains(event.getPropertyName())) {
+					frame.setReloadable(true);
 				}
 			}
 		});
@@ -527,7 +528,10 @@ public class PMS {
 					}
 					get().getServer().stop();
 					Thread.sleep(500);
-				} catch (Exception e) {
+				} catch (IOException e) {
+					logger.debug("Caught exception", e);
+				} catch (InterruptedException e) {
+					logger.debug("Caught exception", e);
 				}
 			}
 		});
@@ -739,8 +743,10 @@ public class PMS {
 							logger.info(String.format("Generated new UUID based on the MAC address of the network adapter '%s'", ni.getDisplayName()));
 						}
 					}
-				} catch (Throwable e) {
-					//do nothing
+				} catch (SocketException e) {
+					logger.debug("Caught exception", e);
+				} catch (UnknownHostException e) {
+					logger.debug("Caught exception", e);
 				}
 
 				//create random UUID if the generation by MAC address failed
@@ -962,10 +968,10 @@ public class PMS {
 	}
 
 	public void storeFileInCache(File file, int formatType) {
-		if (getConfiguration().getUseCache()) {
-			if (!getDatabase().isDataExists(file.getAbsolutePath(), file.lastModified())) {
-				getDatabase().insertData(file.getAbsolutePath(), file.lastModified(), formatType, null);
-			}
+		if (getConfiguration().getUseCache()
+				&& !getDatabase().isDataExists(file.getAbsolutePath(), file.lastModified())) {
+
+			getDatabase().insertData(file.getAbsolutePath(), file.lastModified(), formatType, null);
 		}
 	}
 
