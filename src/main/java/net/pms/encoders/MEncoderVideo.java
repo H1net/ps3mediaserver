@@ -814,7 +814,6 @@ public class MEncoderVideo extends Player {
 
 		builder.add(mencoder_noass_subpos, cc.xy(15, 41));
 
-
 		ass = new JCheckBox(Messages.getString("MEncoderVideo.20"));
 		ass.setContentAreaFilled(false);
 		ass.addItemListener(new ItemListener() {
@@ -823,14 +822,19 @@ public class MEncoderVideo extends Player {
 					configuration.setMencoderAss(e.getStateChange() == ItemEvent.SELECTED);
 				}
 
-				mencoder_ass_scale.setEnabled(configuration.isMencoderAss());
-				mencoder_ass_outline.setEnabled(configuration.isMencoderAss());
-				mencoder_ass_shadow.setEnabled(configuration.isMencoderAss());
-				mencoder_ass_margin.setEnabled(configuration.isMencoderAss());
-				mencoder_noass_scale.setEnabled(!configuration.isMencoderAss());
-				mencoder_noass_outline.setEnabled(!configuration.isMencoderAss());
-				mencoder_noass_blur.setEnabled(!configuration.isMencoderAss());
-				mencoder_noass_subpos.setEnabled(!configuration.isMencoderAss());
+				boolean showAssStyleOptions = false;
+				if (configuration.isMencoderAss() && !configuration.isMencoderAssDefaultStyle()) {
+					showAssStyleOptions = true;
+				}
+
+				mencoder_ass_scale.setEnabled(showAssStyleOptions);
+				mencoder_ass_outline.setEnabled(showAssStyleOptions);
+				mencoder_ass_shadow.setEnabled(showAssStyleOptions);
+				mencoder_ass_margin.setEnabled(showAssStyleOptions);
+				mencoder_noass_scale.setEnabled(!showAssStyleOptions);
+				mencoder_noass_outline.setEnabled(!showAssStyleOptions);
+				mencoder_noass_blur.setEnabled(!showAssStyleOptions);
+				mencoder_noass_subpos.setEnabled(!showAssStyleOptions);
 			}
 		});
 
@@ -853,12 +857,29 @@ public class MEncoderVideo extends Player {
 		assdefaultstyle.setContentAreaFilled(false);
 		assdefaultstyle.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				configuration.setMencoderAssDefaultStyle(e.getStateChange() == ItemEvent.SELECTED);
+				if (e != null) {
+					configuration.setMencoderAssDefaultStyle(e.getStateChange() == ItemEvent.SELECTED);
+				}
+
+				boolean showAssStyleOptions = false;
+				if (configuration.isMencoderAss() && !configuration.isMencoderAssDefaultStyle()) {
+					showAssStyleOptions = true;
+				}
+
+				mencoder_ass_scale.setEnabled(showAssStyleOptions);
+				mencoder_ass_outline.setEnabled(showAssStyleOptions);
+				mencoder_ass_shadow.setEnabled(showAssStyleOptions);
+				mencoder_ass_margin.setEnabled(showAssStyleOptions);
+				mencoder_noass_scale.setEnabled(!showAssStyleOptions);
+				mencoder_noass_outline.setEnabled(!showAssStyleOptions);
+				mencoder_noass_blur.setEnabled(!showAssStyleOptions);
+				mencoder_noass_subpos.setEnabled(!showAssStyleOptions);
 			}
 		});
 
 		builder.add(assdefaultstyle, cc.xyw(8, 37, 4));
 		assdefaultstyle.setSelected(configuration.isMencoderAssDefaultStyle());
+		assdefaultstyle.getItemListeners()[0].itemStateChanged(null);
 
 		subs = new JCheckBox(Messages.getString("MEncoderVideo.22"));
 		subs.setContentAreaFilled(false);
@@ -1382,6 +1403,7 @@ public class MEncoderVideo extends Player {
 			}
 		}
 
+		// Apply subtitle styles like font, color, scale, margin, etc.
 		if (!configuration.isMencoderDisableSubs() && !avisynth()) {
 			if (configuration.getMencoderFont() != null && configuration.getMencoderFont().length() > 0) {
 				sb.append("-subfont ").append(configuration.getMencoderFont()).append(" ");
@@ -1391,7 +1413,18 @@ public class MEncoderVideo extends Player {
 					sb.append("-subfont ").append(font).append(" ");
 				}
 			}
+
+			int subtitleMargin = 0;
+			int userMargin     = 0;
+
 			if (configuration.isMencoderAss() && !foundNoassParam) {
+
+				// Add to the subtitle margin if overscan compensation is being used
+				// This keeps the subtitle text inside the frame instead of in the border
+				if (intOCH > 0) {
+					subtitleMargin = (media.getHeight() / 100) * intOCH;
+				}
+
 				if (!configuration.isMencoderAssDefaultStyle() || (subString != null && params.sid.getType() != DLNAMediaSubtitle.ASS)) {
 					String assSubColor = "ffffff00";
 					if (configuration.getSubsColor() != 0) {
@@ -1401,19 +1434,38 @@ public class MEncoderVideo extends Player {
 						}
 					}
 					sb.append("-ass-color ").append(assSubColor).append(" -ass-border-color 00000000 -ass-font-scale ").append(configuration.getMencoderAssScale());
-					sb.append(" -ass-force-style FontName=Arial,Outline=").append(configuration.getMencoderAssOutline()).append(",Shadow=").append(configuration.getMencoderAssShadow()).append(",MarginV=").append(configuration.getMencoderAssMargin()).append(" ");
+					sb.append(" -ass-force-style FontName=Arial,Outline=").append(configuration.getMencoderAssOutline()).append(",Shadow=").append(configuration.getMencoderAssShadow());
+
+					try {
+						userMargin = Integer.parseInt(configuration.getMencoderAssMargin());
+					} catch (NumberFormatException n) {
+						logger.debug("Could not parse SSA margin from \"" + configuration.getMencoderAssMargin() + "\"");
+					}
+					subtitleMargin = subtitleMargin + userMargin;
+
+					sb.append(",MarginV=").append(Math.round(subtitleMargin)).append(" ");
+				} else if (intOCH > 0) {
+					sb.append("-ass-force-style MarginV=").append(Math.round(subtitleMargin)).append(" ");
 				}
 			} else {
 				sb.append("-subfont-text-scale ").append(configuration.getMencoderNoAssScale());
 				sb.append(" -subfont-outline ").append(configuration.getMencoderNoAssOutline());
 				sb.append(" -subfont-blur ").append(configuration.getMencoderNoAssBlur());
-				int subpos = 1;
+
+				// Add to the subtitle margin if overscan compensation is being used
+				// This keeps the subtitle text inside the frame instead of in the border
+				if (intOCH > 0) {
+					subtitleMargin = intOCH;
+				}
+
 				try {
-					subpos = Integer.parseInt(configuration.getMencoderNoAssSubPos());
+					userMargin = Integer.parseInt(configuration.getMencoderNoAssSubPos());
 				} catch (NumberFormatException n) {
 					logger.debug("Could not parse subpos from \"" + configuration.getMencoderNoAssSubPos() + "\"");
 				}
-				sb.append(" -subpos ").append(100 - subpos);
+				subtitleMargin = subtitleMargin + userMargin;
+
+				sb.append(" -subpos ").append(100 - Math.round(subtitleMargin));
 			}
 		}
 
@@ -1587,18 +1639,16 @@ public class MEncoderVideo extends Player {
 			if (intOCW > 0 || intOCH > 0) {
 				int intOCWPixels = (media.getWidth()  / 100) * intOCW;
 				int intOCHPixels = (media.getHeight() / 100) * intOCH;
-				int scaleWidthWithOverscan;
-				int scaleHeightWithOverscan;
 
-				scaleWidthWithOverscan  = scaleWidth  + intOCWPixels;
-				scaleHeightWithOverscan = scaleHeight + intOCHPixels;
+				scaleWidth  = scaleWidth  + intOCWPixels;
+				scaleHeight = scaleHeight + intOCHPixels;
 
 				// See if the video needs to be scaled down
 				if (
-					(scaleWidthWithOverscan > params.mediaRenderer.getMaxVideoWidth()) ||
-					(scaleHeightWithOverscan > params.mediaRenderer.getMaxVideoHeight())
+					(scaleWidth > params.mediaRenderer.getMaxVideoWidth()) ||
+					(scaleHeight > params.mediaRenderer.getMaxVideoHeight())
 				) {
-					double overscannedAspectRatio = scaleWidthWithOverscan / scaleHeightWithOverscan;
+					double overscannedAspectRatio = scaleWidth / scaleHeight;
 					rendererAspectRatio = params.mediaRenderer.getMaxVideoWidth() / params.mediaRenderer.getMaxVideoHeight();
 
 					if (overscannedAspectRatio > rendererAspectRatio) {
