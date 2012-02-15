@@ -1,3 +1,9 @@
+1.50.2-SB66:
+    * Synchronised with official r1228 (3b76460a29) from r1175 (0579dc80ff), changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
+    * Updated MPlayer and MEncoder to SB24 from SB23, changelog: http://www.spirton.com/mplayer-mencoder-subjunk-build/#Changelog
+    * Fixed video aspect ratios and subtitle positioning when using overscan compensation
+    * Clarified some MEncoder settings that were misleading/wrong
+
 1.50.2-SB65:
     * Synchronised with official r1175 (0579dc80ff) from r1131 (d9f34153dd), changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
 
