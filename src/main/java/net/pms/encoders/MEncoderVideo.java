@@ -1374,9 +1374,18 @@ public class MEncoderVideo extends Player {
 		// Note: The MP4 container with SRT rule is a workaround for MEncoder r30369. If there is ever a later version of MEncoder that supports external srt subs we should use that. As of r32848 that isn't the case
 		if (
 			params.sid != null &&
-			params.sid.getType() != DLNAMediaSubtitle.EMBEDDED &&
+			(
+				(
+					params.sid.isFileUtf8() &&
+					params.sid.getType() == DLNAMediaSubtitle.EMBEDDED
+				) ||
+				params.sid.getType() != DLNAMediaSubtitle.EMBEDDED
+			) &&
 			params.sid.getType() != DLNAMediaSubtitle.VOBSUB &&
-			!(params.sid.getType() == DLNAMediaSubtitle.SUBRIP && media.getContainer().equals("mp4")) &&
+			!(
+				params.sid.getType() == DLNAMediaSubtitle.SUBRIP &&
+				media.getContainer().equals("mp4")
+			) &&
 			!configuration.isMencoderDisableSubs() &&
 			configuration.isMencoderAss() &&
 			!foundNoassParam &&
@@ -1384,6 +1393,12 @@ public class MEncoderVideo extends Player {
 			!avisynth()
 		) {
 			sb.append("-ass -").append(configuration.isMencoderFontConfig() ? "" : "no").append("fontconfig ");
+
+			if (params.sid.getType() != DLNAMediaSubtitle.EMBEDDED) {
+				// Workaround for MPlayer #2041, remove when that bug is fixed
+				sb.append("-noflip-hebrew ");
+			}
+
 			if (mpegts || wmv) {
 				needAssFixPTS = Platform.isWindows(); // don't think the fixpts filter is in the mplayer trunk
 			}
