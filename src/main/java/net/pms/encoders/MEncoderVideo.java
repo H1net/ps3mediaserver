@@ -1369,18 +1369,13 @@ public class MEncoderVideo extends Player {
 		}
 
 		StringBuilder sb = new StringBuilder();
-
-		// Apply subtitle styles like font, color, scale, margin, etc.
+		// set subtitles options
 		if (!configuration.isMencoderDisableSubs() && !avisynth()) {
 			int subtitleMargin = 0;
 			int userMargin     = 0;
 
-			/*
-			 * Use ASS flag (and therefore ASS font styles) for all subtitled files except vobsub, embedded, dvd and mp4 container with srt
-			 * Note 1: The MP4 container with SRT rule is a workaround for MEncoder r30369. If there is ever a later version of MEncoder that supports external srt subs we should use that. As of r32848 that isn't the case
-			 * Note 2: The isFileItf8 and embedded part of the if statement is because if a file has embedded vobsub the ass flag breaks it, so here we ensure that the embedded subs are not vobsub.
-			 * TO-DO: Replace the EMBEDDED option, which is very limited and unhelpful since there are many different types of embedded subtitles, with more options.
-			 */
+			// Use ASS flag (and therefore ASS font styles) for all subtitled files except vobsub, embedded, dvd and mp4 container with srt
+			// Note: The MP4 container with SRT rule is a workaround for MEncoder r30369. If there is ever a later version of MEncoder that supports external srt subs we should use that. As of r32848 that isn't the case
 			if (
 				params.sid != null &&
 				(
