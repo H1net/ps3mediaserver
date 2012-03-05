@@ -1,3 +1,8 @@
+1.50.2-SB67:
+    * Synchronised with official r1233 (3a6c5e523f) from r1228 (3b76460a29), changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
+    * Updated MPlayer and MEncoder to SB26 from SB24, changelog: http://www.spirton.com/mplayer-mencoder-subjunk-build/#Changelog
+    * Fixed the display of SRT and embedded plaintext subtitles for the Hebrew language.
+
 1.50.2-SB66:
     * Synchronised with official r1228 (3b76460a29) from r1175 (0579dc80ff), changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
     * Updated MPlayer and MEncoder to SB24 from SB23, changelog: http://www.spirton.com/mplayer-mencoder-subjunk-build/#Changelog
