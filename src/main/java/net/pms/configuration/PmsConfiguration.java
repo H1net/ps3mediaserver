@@ -647,11 +647,11 @@ public class PmsConfiguration {
 	}
 
 	/**
-	 * Returns the font scale used for ASS subtitling. Default value is 1.0.
+	 * Returns the font scale used for ASS subtitling. Default value is 1.4.
 	 * @return The ASS font scale.
 	 */
 	public String getMencoderAssScale() {
-		return getString(KEY_MENCODER_ASS_SCALE, "1.0");
+		return getString(KEY_MENCODER_ASS_SCALE, "1.4");
 	}
 
 	/**
