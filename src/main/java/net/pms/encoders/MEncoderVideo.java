@@ -821,20 +821,6 @@ public class MEncoderVideo extends Player {
 				if (e != null) {
 					configuration.setMencoderAss(e.getStateChange() == ItemEvent.SELECTED);
 				}
-
-				boolean showAssStyleOptions = false;
-				if (configuration.isMencoderAss() && !configuration.isMencoderAssDefaultStyle()) {
-					showAssStyleOptions = true;
-				}
-
-				mencoder_ass_scale.setEnabled(showAssStyleOptions);
-				mencoder_ass_outline.setEnabled(showAssStyleOptions);
-				mencoder_ass_shadow.setEnabled(showAssStyleOptions);
-				mencoder_ass_margin.setEnabled(showAssStyleOptions);
-				mencoder_noass_scale.setEnabled(!showAssStyleOptions);
-				mencoder_noass_outline.setEnabled(!showAssStyleOptions);
-				mencoder_noass_blur.setEnabled(!showAssStyleOptions);
-				mencoder_noass_subpos.setEnabled(!showAssStyleOptions);
 			}
 		});
 
@@ -860,20 +846,6 @@ public class MEncoderVideo extends Player {
 				if (e != null) {
 					configuration.setMencoderAssDefaultStyle(e.getStateChange() == ItemEvent.SELECTED);
 				}
-
-				boolean showAssStyleOptions = false;
-				if (configuration.isMencoderAss() && !configuration.isMencoderAssDefaultStyle()) {
-					showAssStyleOptions = true;
-				}
-
-				mencoder_ass_scale.setEnabled(showAssStyleOptions);
-				mencoder_ass_outline.setEnabled(showAssStyleOptions);
-				mencoder_ass_shadow.setEnabled(showAssStyleOptions);
-				mencoder_ass_margin.setEnabled(showAssStyleOptions);
-				mencoder_noass_scale.setEnabled(!showAssStyleOptions);
-				mencoder_noass_outline.setEnabled(!showAssStyleOptions);
-				mencoder_noass_blur.setEnabled(!showAssStyleOptions);
-				mencoder_noass_subpos.setEnabled(!showAssStyleOptions);
 			}
 		});
 
