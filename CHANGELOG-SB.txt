@@ -1,4 +1,10 @@
-1.50.2-SB67:
+1.51.0-SB68:
+    * Synchronised with official r1253 (f1bc902f83), changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
+    * Updated MPlayer and MEncoder to SB28, changelog: http://www.spirton.com/mplayer-mencoder-subjunk-build/#Changelog
+    * Updated MediaInfo to 0.7.54, changelog: http://mediainfo.sourceforge.net/Log
+    * Updated ImageMagick Convert to 6.7.6, changelog: http://www.imagemagick.org/script/changelog.php
+
+1.51.0-SB67:
     * Synchronised with official r1241 (e257484166) from r1228 (3b76460a29), changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
     * Updated MPlayer and MEncoder to SB26 from SB24, changelog: http://www.spirton.com/mplayer-mencoder-subjunk-build/#Changelog
     * Fixed the display of SRT and embedded plaintext subtitles for the Hebrew language.
