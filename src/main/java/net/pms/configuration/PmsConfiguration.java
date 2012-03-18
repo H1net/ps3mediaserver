@@ -95,6 +95,7 @@ public class PmsConfiguration {
 	private static final String KEY_IPHOTO_ENABLED = "iphoto";
 	private static final String KEY_ITUNES_ENABLED = "itunes";
 	private static final String KEY_LANGUAGE = "language";
+	private static final String KEY_LOGGING_LEVEL = "level";
 	private static final String KEY_MAX_AUDIO_BUFFER = "maxaudiobuffer";
 	private static final String KEY_MAX_BITRATE = "maximumbitrate";
 	private static final String KEY_MAX_MEMORY_BUFFER_SIZE = "maxvideobuffer";
@@ -646,11 +647,11 @@ public class PmsConfiguration {
 	}
 
 	/**
-	 * Returns the font scale used for ASS subtitling. Default value is 1.0.
+	 * Returns the font scale used for ASS subtitling. Default value is 1.4.
 	 * @return The ASS font scale.
 	 */
 	public String getMencoderAssScale() {
-		return getString(KEY_MENCODER_ASS_SCALE, "1.0");
+		return getString(KEY_MENCODER_ASS_SCALE, "1.4");
 	}
 
 	/**
@@ -965,7 +966,7 @@ public class PmsConfiguration {
 	 * @return True if fontconfig should be used, false otherwise.
 	 */
 	public boolean isMencoderFontConfig() {
-		return getBoolean(KEY_MENCODER_FONT_CONFIG, false);
+		return getBoolean(KEY_MENCODER_FONT_CONFIG, true);
 	}
 
 	/**
@@ -1429,7 +1430,7 @@ public class PmsConfiguration {
 	 * @return True if PMS should hide the folder, false othewise.
 	 */
 	public boolean getHideVideoSettings() {
-		return getBoolean(KEY_HIDE_VIDEO_SETTINGS, false);
+		return getBoolean(KEY_HIDE_VIDEO_SETTINGS, true);
 	}
 
 	/**
@@ -1615,6 +1616,10 @@ public class PmsConfiguration {
 		configuration.setProperty(KEY_MENCODER_OVERSCAN_COMPENSATION_HEIGHT, value);
 	}
 
+	public int getLoggingLevel() {
+		return getInt(KEY_LOGGING_LEVEL, 2);
+	}
+
 	public void setEnginesAsList(ArrayList<String> enginesAsList) {
 		configuration.setProperty(KEY_ENGINES, listToString(enginesAsList));
 	}
@@ -1677,7 +1682,7 @@ public class PmsConfiguration {
 	}
 
 	public boolean isHideEngineNames() {
-		return getBoolean(KEY_HIDE_ENGINENAMES, false);
+		return getBoolean(KEY_HIDE_ENGINENAMES, true);
 	}
 
 	public void setHideEngineNames(boolean value) {
@@ -1685,7 +1690,7 @@ public class PmsConfiguration {
 	}
 
 	public boolean isHideExtensions() {
-		return getBoolean(KEY_HIDE_EXTENSIONS, false);
+		return getBoolean(KEY_HIDE_EXTENSIONS, true);
 	}
 
 	public void setHideExtensions(boolean value) {
@@ -1775,11 +1780,11 @@ public class PmsConfiguration {
 	 * <li>3: Case-insensitive ASCIIbetical sort</li>
 	 * <li>4: Locale-sensitive natural sort</li>
 	 * </ul>
-	 * Default value is 0.
+	 * Default value is 3.
 	 * @return The sort method
 	 */
 	public int getSortMethod() {
-		return getInt(KEY_SORT_METHOD, 0);
+		return getInt(KEY_SORT_METHOD, 3);
 	}
 
 	/**
@@ -1924,7 +1929,7 @@ public class PmsConfiguration {
 	}
 
 	public boolean getHideTranscodeEnabled() {
-		return getBoolean(KEY_HIDE_TRANSCODE_FOLDER, false);
+		return getBoolean(KEY_HIDE_TRANSCODE_FOLDER, true);
 	}
 
 	public void setHideTranscodeEnabled(boolean value) {

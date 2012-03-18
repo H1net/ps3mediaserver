@@ -251,7 +251,7 @@ public class RestrictedFileSystemView extends FileSystemView {
 				tempFile.deleteOnExit();
 				_defaultDirectory = tempFile.getParentFile();
 			} catch (IOException e) {
-				LOGGER.debug("Caught exception", e);
+				e.printStackTrace();
 			}
 		}
 		return _defaultDirectory;

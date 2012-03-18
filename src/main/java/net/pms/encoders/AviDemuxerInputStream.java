@@ -152,8 +152,9 @@ public class AviDemuxerInputStream extends InputStream {
 				try {
 					//Thread.sleep(500);
 					parseHeader();
-				} catch (IOException e) {
-					logger.debug("Parsing error", e);
+				} catch (Exception e) {
+					//e.printStackTrace();
+					logger.debug("Parsing error: " + e.getMessage());
 				}
 			}
 		};
@@ -442,7 +443,7 @@ public class AviDemuxerInputStream extends InputStream {
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
-				logger.trace("Sleep interrupted", e);
+				e.printStackTrace();
 			}
 			c++;
 		}
@@ -465,7 +466,7 @@ public class AviDemuxerInputStream extends InputStream {
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
-				logger.trace("Sleep interrupted", e);
+				e.printStackTrace();
 			}
 			c++;
 		}

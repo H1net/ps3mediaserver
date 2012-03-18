@@ -120,7 +120,7 @@ public class Proxy extends Thread {
 			}
 
 			File cachedResource = new File(directoryResourceFile, fileResource);
-			// logger.trace("Trying to find: " + cachedResource.getAbsolutePath());
+			//System.out.println("Trying to find: " + cachedResource.getAbsolutePath());
 
 			byte[] buffer = new byte[8192];
 			boolean resourceExists = cachedResource.exists() || this.getClass().getResource("/" + fileN) != null;
@@ -151,7 +151,6 @@ public class Proxy extends Thread {
 
 			int bytes_read;
 			long CL = 10000000000L;
-
 			while (total_read < CL && (bytes_read = sockWebInputStream.read(buffer)) != -1) {
 				if (!resourceExists) {
 					if (10000000000L == CL) {
@@ -166,7 +165,7 @@ public class Proxy extends Thread {
 						byte end[] = new byte[7];
 						System.arraycopy(buffer, bytes_read - 7, end, 0, 7);
 						if (new String(end).equals("\r\n0\r\n\r\n")) {
-							logger.trace("end of transfer chunked");
+							System.out.println("end of transfer chunked");
 							CL = -1;
 						}
 					}
@@ -178,9 +177,6 @@ public class Proxy extends Thread {
 				baos.write(buffer, 0, bytes_read);
 				total_read += bytes_read;
 			}
-
-			sockWebInputStream.close();
-
 			if (inMemory) {
 
 				baos.close();
@@ -192,6 +188,7 @@ public class Proxy extends Thread {
 
 				fOUT.close();
 			}
+
 
 			socketToWeb.close();
 			toBrowser.close();

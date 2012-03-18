@@ -40,13 +40,13 @@ class Version {
 
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		String out = "";
 		for (int i = 0; i < elements.length; i++) {
-			buf.append(elements[i]);
+			out += elements[i];
 			if (i != elements.length - 1) {
-				buf.append(".");
+				out += ".";
 			}
 		}
-		return buf.toString();
+		return out;
 	}
 }

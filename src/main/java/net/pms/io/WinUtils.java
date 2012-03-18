@@ -276,7 +276,7 @@ public class WinUtils extends BasicSystemUtils implements SystemUtils {
 				}
 			}
 		} catch (Exception e) {
-			logger.debug("Caught exception", e);
+			e.printStackTrace();
 		}
 	}
 

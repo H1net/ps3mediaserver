@@ -316,8 +316,8 @@ public class PMS {
 		if (System.getProperty(CONSOLE) == null) {
 			frame = new LooksFrame(autoUpdater, configuration);
 		} else {
-			logger.info("GUI environment not available");
-			logger.info("Switching to console mode");
+			System.out.println("GUI environment not available");
+			System.out.println("Switching to console mode");
 			frame = new DummyFrame();
 		}
 		configuration.addConfigurationListener(new ConfigurationListener() {
@@ -337,7 +337,7 @@ public class PMS {
 		logger.info("by shagrath / 2008-2012");
 		logger.info("http://ps3mediaserver.org");
 		logger.info("https://github.com/ps3mediaserver/ps3mediaserver");
-		logger.info("http://ps3mediaserver.blogspot.com");
+		logger.info("Custom build by SubJunk, http://www.spirton.com");
 		logger.info("");
 
 		String commitId = PropertiesUtil.getProjectProperties().get("git.commit.id");
@@ -654,7 +654,7 @@ public class PMS {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						logger.trace("Caught exception", e);
+						e.printStackTrace();
 					}
 					server = new HTTPServer(configuration.getServerPort());
 					server.start();

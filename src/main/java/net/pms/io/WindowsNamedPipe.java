@@ -142,7 +142,7 @@ public class WindowsNamedPipe extends Thread implements ProcessWrapper {
 				//Thread.sleep(150);
 			}
 		} catch (Exception e1) {
-			logger.debug("Caught exception", e1);
+			e1.printStackTrace();
 		}
 	}
 

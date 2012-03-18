@@ -3,9 +3,6 @@ package net.pms.formats;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.pms.PMS;
 import net.pms.configuration.RendererConfiguration;
 import net.pms.dlna.DLNAMediaInfo;
@@ -16,7 +13,6 @@ import net.pms.io.OutputParams;
 import net.pms.io.ProcessWrapperImpl;
 
 public class RAW extends JPG {
-	private static final Logger LOGGER = LoggerFactory.getLogger(RAW.class);
 
 	/**
 	 * {@inheritDoc}
@@ -103,7 +99,7 @@ public class RAW extends JPG {
 			media.finalize(type, file);
 			media.setMediaparsed(true);
 		} catch (Exception e) {
-			LOGGER.debug("Caught exception", e);
+			e.printStackTrace();
 		}
 	}
 }

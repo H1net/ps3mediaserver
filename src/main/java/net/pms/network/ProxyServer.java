@@ -22,11 +22,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class ProxyServer extends Thread {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ProxyServer.class);
 	private int port;
 
 	public ProxyServer(int port) {
@@ -52,7 +48,7 @@ public class ProxyServer extends Thread {
 				s.close();
 			}
 		} catch (IOException e1) {
-			LOGGER.debug("Caught exception", e1);
+			e1.printStackTrace();
 		}
 	}
 }
