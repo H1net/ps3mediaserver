@@ -843,15 +843,12 @@ public class MEncoderVideo extends Player {
 		assdefaultstyle.setContentAreaFilled(false);
 		assdefaultstyle.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				if (e != null) {
-					configuration.setMencoderAssDefaultStyle(e.getStateChange() == ItemEvent.SELECTED);
-				}
+				configuration.setMencoderAssDefaultStyle(e.getStateChange() == ItemEvent.SELECTED);
 			}
 		});
 
 		builder.add(assdefaultstyle, cc.xyw(8, 37, 4));
 		assdefaultstyle.setSelected(configuration.isMencoderAssDefaultStyle());
-		assdefaultstyle.getItemListeners()[0].itemStateChanged(null);
 
 		subs = new JCheckBox(Messages.getString("MEncoderVideo.22"));
 		subs.setContentAreaFilled(false);

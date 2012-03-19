@@ -31,7 +31,7 @@
 	<artifactId>pms</artifactId>
 	<name>PS3 Media Server</name>
 	<packaging>jar</packaging>
-	<version>1.51.0-SB68</version>
+	<version>1.51.1-SB68</version>
 	<url>http://www.ps3mediaserver.org/</url>
 	<inceptionYear>2008</inceptionYear>
 
@@ -112,7 +112,7 @@
 		<!-- netty -->
 		<repository>
 			<id>jboss</id>
-			<url>http://repository.jboss.com/maven2/</url>
+			<url>http://repository.jboss.org/</url>
 			<releases>
 				<enabled>false</enabled>
 			</releases>
