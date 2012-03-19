@@ -1341,15 +1341,14 @@ public class MEncoderVideo extends Player {
 		}
 
 		StringBuilder sb = new StringBuilder();
-		// set subtitles options
-		if (!configuration.isMencoderDisableSubs() && !avisynth()) {
+		// Set subtitles options
+		if (!configuration.isMencoderDisableSubs() && !avisynth() && params.sid != null) {
 			int subtitleMargin = 0;
 			int userMargin     = 0;
 
 			// Use ASS flag (and therefore ASS font styles) for all subtitled files except vobsub, embedded, dvd and mp4 container with srt
 			// Note: The MP4 container with SRT rule is a workaround for MEncoder r30369. If there is ever a later version of MEncoder that supports external srt subs we should use that. As of r32848 that isn't the case
 			if (
-				params.sid != null &&
 				(
 					(
 						params.sid.isFileUtf8() &&
@@ -1459,26 +1458,26 @@ public class MEncoderVideo extends Player {
 				sb.append(" -subpos ").append(100 - Math.round(subtitleMargin)).append(" ");
 			}
 
-			// common subtitles options
-			// use fontconfig if enabled
+			// Common subtitle options
+			// Use fontconfig if enabled
 			sb.append("-").append(configuration.isMencoderFontConfig() ? "" : "no").append("fontconfig ");
 
 			if (mpegts || wmv) {
 				needAssFixPTS = Platform.isWindows(); // don't think the fixpts filter is in the mplayer trunk
 			}
-		}
 
-		// Apply DVD/VOBsub subtitle quality
-		if (params.sid != null && params.sid.getType() == DLNAMediaSubtitle.VOBSUB && configuration.getMencoderVobsubSubtitleQuality() != null) {
-			String subtitleQuality = configuration.getMencoderVobsubSubtitleQuality();
+			// Apply DVD/VOBsub subtitle quality
+			if (params.sid.getType() == DLNAMediaSubtitle.VOBSUB && configuration.getMencoderVobsubSubtitleQuality() != null) {
+				String subtitleQuality = configuration.getMencoderVobsubSubtitleQuality();
 
-			sb.append("-spuaa ").append(subtitleQuality).append(" ");
-		}
+				sb.append("-spuaa ").append(subtitleQuality).append(" ");
+			}
 
-		if (params.sid != null && !params.sid.isFileUtf8() && !configuration.isMencoderDisableSubs() && configuration.getMencoderSubCp() != null && configuration.getMencoderSubCp().length() > 0) {
-			sb.append("-subcp ").append(configuration.getMencoderSubCp()).append(" ");
-			if (configuration.isMencoderSubFribidi()) {
-				sb.append("-fribidi-charset ").append(configuration.getMencoderSubCp()).append(" ");
+			if (!params.sid.isFileUtf8() && !configuration.isMencoderDisableSubs() && configuration.getMencoderSubCp() != null && configuration.getMencoderSubCp().length() > 0) {
+				sb.append("-subcp ").append(configuration.getMencoderSubCp()).append(" ");
+				if (configuration.isMencoderSubFribidi()) {
+					sb.append("-fribidi-charset ").append(configuration.getMencoderSubCp()).append(" ");
+				}
 			}
 		}
 
