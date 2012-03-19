@@ -1328,8 +1328,6 @@ public class MEncoderVideo extends Player {
 			}
 		}
 
-		boolean needAssFixPTS = false;
-
 		boolean foundNoassParam = false;
 		if (media != null) {
 			String sArgs [] = getSpecificCodecOptions(configuration.getCodecSpecificConfig(), media, params, fileName, subString, configuration.isMencoderIntelligentSync(), false);
@@ -1361,8 +1359,8 @@ public class MEncoderVideo extends Player {
 					params.sid.getType() == DLNAMediaSubtitle.SUBRIP &&
 					media.getContainer().equals("mp4")
 				) &&
-				configuration.isMencoderAss() && 	// GUI: enable subtitles formating
-				!foundNoassParam &&			// GUI: codec specific options
+				configuration.isMencoderAss() &&   // GUI: enable subtitles formating
+				!foundNoassParam &&                // GUI: codec specific options
 				!dvd
 			) {
 				sb.append("-ass ");
@@ -1461,10 +1459,6 @@ public class MEncoderVideo extends Player {
 			// Common subtitle options
 			// Use fontconfig if enabled
 			sb.append("-").append(configuration.isMencoderFontConfig() ? "" : "no").append("fontconfig ");
-
-			if (mpegts || wmv) {
-				needAssFixPTS = Platform.isWindows(); // don't think the fixpts filter is in the mplayer trunk
-			}
 
 			// Apply DVD/VOBsub subtitle quality
 			if (params.sid.getType() == DLNAMediaSubtitle.VOBSUB && configuration.getMencoderVobsubSubtitleQuality() != null) {
@@ -1616,12 +1610,6 @@ public class MEncoderVideo extends Player {
 			cmdArray = Arrays.copyOf(cmdArray, cmdArray.length + 2);
 			cmdArray[cmdArray.length - 4] = "-psprobe";
 			cmdArray[cmdArray.length - 3] = "10000";
-		}
-
-		if (needAssFixPTS) {
-			cmdArray = Arrays.copyOf(cmdArray, cmdArray.length + 2);
-			cmdArray[cmdArray.length - 4] = "-vf";
-			cmdArray[cmdArray.length - 3] = "ass,fixpts";
 		}
 
 		boolean deinterlace = configuration.isMencoderYadif();
