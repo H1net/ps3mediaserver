@@ -1,3 +1,7 @@
+1.52.1-SB69:
+    * Synchronised with official r1305 (03bfb207f5), changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
+    * Updated MPlayer and MEncoder to SB29, changelog: http://www.spirton.com/mplayer-mencoder-subjunk-build/#Changelog
+
 1.51.0-SB68:
     * Synchronised with official r1253 (f1bc902f83), changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
     * Updated MPlayer and MEncoder to SB28, changelog: http://www.spirton.com/mplayer-mencoder-subjunk-build/#Changelog
