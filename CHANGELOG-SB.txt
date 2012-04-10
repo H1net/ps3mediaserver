@@ -1,3 +1,8 @@
+1.52.2-SB70:
+    * Synchronised with official r1322 (03bfb207f5), changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
+    * Updated MPlayer and MEncoder to SB30, changelog: http://www.spirton.com/mplayer-mencoder-subjunk-build/#Changelog
+    * Updated ImageMagick Convert to 6.7.6-4
+
 1.52.1-SB69:
     * Synchronised with official r1305 (03bfb207f5), changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
     * Updated MPlayer and MEncoder to SB29, changelog: http://www.spirton.com/mplayer-mencoder-subjunk-build/#Changelog
